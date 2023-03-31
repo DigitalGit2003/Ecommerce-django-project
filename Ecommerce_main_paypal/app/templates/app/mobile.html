@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Mobile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            {% comment %} Side Bar for Mobile filter {% endcomment %}
+            <div class="list-group">
+                <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria-current="true">All Mobiles</a>
+                <a href="{% url 'mobiledata' 'OPPO' %}" class="list-group-item list-group-item-action" aria-current="true">OPPO</a>
+                <a href="{% url 'mobiledata' 'Redmi' %}" class="list-group-item list-group-item-action" aria-current="true">Redmi</a>
+                <a href="{% url 'mobiledata' 'Realme' %}" class="list-group-item list-group-item-action" aria-current="true">RealMe</a>
+                <a href="{% url 'mobiledata' 'Samsung'%}" class="list-group-item list-group-item-action" aria-current="true">Samsung</a>
+                <a href="{% url 'mobiledata' 'OnePlus'%}" class="list-group-item list-group-item-action" aria-current="true">OnePlus</a>
+                <a href="{% url 'mobiledata' 'below'%}" class="list-group-item list-group-item-action" aria-current="true">Below Rs. 10,000</a>
+                <a href="{% url 'mobiledata' 'above'%}" class="list-group-item list-group-item-action" aria-current="true">Above Rs. 10,000</a>
+            </div>    
+        </div>
+        {% comment %} <div class="col-sm-8 offset-sm-1"> {% endcomment %}
+        <div class="col-sm-8">
+            {% comment %} Mobile Product List {% endcomment %}
+            <div class="row">
+                {% for product in mobiles %}
+                <div class="col-sm-4 text-center mb-4">
+                    <a href="{% url 'product-detail' product.id %}" class="btn">
+                        <div class="item">
+                            <img src="{{product.product_image.url}}" alt="" height="300" class="">
+                            <div class="fw-bold">{{product.title}}</div>
+                            <div class="fw-bold">Rs. {{product.discounted_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></div>
+                        </div>
+                    </a> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
